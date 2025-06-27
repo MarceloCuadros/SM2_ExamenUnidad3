@@ -1,0 +1,29 @@
+name: Quality Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'  # Versión exacta que estás usando
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze code style and warnings
+        run: flutter analyze
+
+      - name: Run unit and widget tests
+        run: flutter test
