@@ -1,55 +1,70 @@
-Informe de Examen - Unidad III
-Nombre del curso: Desarrollo de Aplicaciones Móviles
-Fecha: [DD/MM/AAAA]
-Nombres completos del estudiante: [Nombre Apellido]
+INFORME DE EXAMEN - UNIDAD III
+Automatización de Calidad con GitHub Actions
 
-🔗 URL del Repositorio en GitHub
-📌 https://github.com/[TU_USUARIO]/SM2_ExamenUnidad3
+📋 INFORMACIÓN BÁSICA
+| Curso: | Desarrollo de Aplicaciones Móviles |
+| Fecha: | [DD/MM/AAAA] |
+| Estudiante: | [Nombre Apellido] |
+| Repositorio: | SM2_ExamenUnidad3 |
 
-📸 Capturas de Pantalla
-1. Estructura de Carpetas .github/workflows/
-https://via.placeholder.com/600x300?text=Carpeta+.github%252Fworkflows+con+quality-check.yml
-(Se muestra la ubicación correcta del archivo quality-check.yml dentro de .github/workflows/.)
+📂 EVIDENCIAS GRÁFICAS
+1. Estructura del Proyecto
+https://via.placeholder.com/800x400/2c3e50/ffffff?text=.github%252Fworkflows%252Fquality-check.yml+%257C+test%252Fmain_test.dart
+Ubicación correcta de los archivos requeridos.
 
-2. Contenido del Archivo quality-check.yml
-https://via.placeholder.com/600x300?text=Contenido+de+quality-check.yml
-(Se evidencia el código YAML configurado para análisis y pruebas automáticas.)
+2. Código del Workflow
+yaml
+name: Quality Check
+on: [push, pull_request]
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+      - name: Run checks
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter test
+Configuración automatizada para análisis y pruebas.
 
-3. Ejecución del Workflow en GitHub Actions
-https://via.placeholder.com/600x300?text=Workflow+ejecut%C3%A1ndose+en+la+pesta%C3%B1a+Actions
-(Workflow exitoso con todos los pasos en verde y 100% de pruebas aprobadas.)
+3. Resultados en GitHub Actions
+https://via.placeholder.com/800x400/27ae60/ffffff?text=%E2%9C%85+All+checks+passed+%257C+100%2525+success
+Workflow completado sin errores.
 
-📝 Explicación de lo Realizado
-1. Configuración del Repositorio
-Se creó un repositorio público en GitHub con el nombre exacto SM2_ExamenUnidad3.
+🔍 DETALLE DE LA IMPLEMENTACIÓN
+📌 Configuración Inicial
+Repositorio público creado con el nombre exacto: SM2_ExamenUnidad3.
 
-Se copió el proyecto móvil desarrollado durante el curso.
+Proyecto móvil migrado al repositorio.
 
-2. Implementación del Workflow
-Se creó el archivo quality-check.yml en .github/workflows/ con el siguiente flujo:
+⚙️ Workflow Automatizado
+Paso	Acción
+Trigger	Push/Pull Request a main
+Entorno	Ubuntu + Flutter 3.19.0
+Análisis	flutter analyze (estilo/errores)
+Pruebas	flutter test (3 tests unitarios)
+🧪 Pruebas Unitarias
+dart
+// test/main_test.dart
+import 'package:flutter_test/flutter_test.dart';
 
-Trigger: Se ejecuta automáticamente en cada push o pull request a la rama main.
-
-Pasos:
-
-Configuración de Flutter (versión 3.19.0).
-
-Instalación de dependencias (flutter pub get).
-
-Análisis de código (flutter analyze).
-
-Ejecución de pruebas unitarias (flutter test).
-
-3. Pruebas Unitarias
-Se implementaron 3 pruebas en main_test.dart para validar:
-
-División de strings con split().
-
-Eliminación de espacios con trim().
-
-Conversión de strings a enteros con int.parse().
-
-4. Verificación
-El workflow se ejecutó correctamente en GitHub Actions.
-
-Todos los pasos (analyze y test) fueron exitosos (100% passed).
+void main() {
+  group('Pruebas Básicas:', () {
+    test('split() divide strings', () {
+      expect("a,b,c".split(','), equals(["a", "b", "c"]));
+    });
+    
+    test('trim() elimina espacios', () {
+      expect("  texto  ".trim(), equals("texto"));
+    });
+    
+    test('int.parse() convierte a entero', () {
+      expect(int.parse("123"), equals(123));
+    });
+  });
+}
