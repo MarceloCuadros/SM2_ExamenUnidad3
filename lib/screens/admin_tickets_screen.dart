@@ -5,9 +5,11 @@ import 'package:proyecto_moviles2/services/auth_service.dart';
 import 'package:proyecto_moviles2/screens/login_screen.dart';
 import 'package:proyecto_moviles2/screens/admin_ticket_detail_screen.dart';
 import 'package:proyecto_moviles2/screens/admin_users_screen.dart';
-import 'package:proyecto_moviles2/widgets/dashboard_widget.dart';
+import 'package:proyecto_moviles2/widgets/dashboard_widget.dart'; // usa el widget importado
 
 class AdminTicketsScreen extends StatefulWidget {
+  const AdminTicketsScreen({Key? key}) : super(key: key);
+
   @override
   _AdminTicketsScreenState createState() => _AdminTicketsScreenState();
 }
@@ -82,18 +84,17 @@ class _AdminTicketsScreenState extends State<AdminTicketsScreen> {
                     color: Colors.black87,
                     fontWeight: FontWeight.w600,
                   ),
-                  items:
-                      ['todos', 'pendiente', 'en_proceso', 'resuelto']
-                          .map(
-                            (status) => DropdownMenuItem(
-                              value: status,
-                              child: Text(
-                                status.toUpperCase(),
-                                style: const TextStyle(letterSpacing: 1.2),
-                              ),
-                            ),
-                          )
-                          .toList(),
+                  items: ['todos', 'pendiente', 'en_proceso', 'resuelto']
+                      .map(
+                        (status) => DropdownMenuItem(
+                          value: status,
+                          child: Text(
+                            status.toUpperCase(),
+                            style: const TextStyle(letterSpacing: 1.2),
+                          ),
+                        ),
+                      )
+                      .toList(),
                   onChanged: (value) {
                     setState(() => _filterStatus = value!);
                   },
@@ -151,18 +152,17 @@ class _AdminTicketsScreenState extends State<AdminTicketsScreen> {
                   borderRadius: BorderRadius.circular(14),
                   borderSide: BorderSide(color: buttonColor, width: 2),
                 ),
-                suffixIcon:
-                    _searchQuery.isNotEmpty
-                        ? IconButton(
-                          icon: const Icon(Icons.clear, color: Colors.grey),
-                          onPressed: () {
-                            setState(() {
-                              _searchQuery = '';
-                              _searchController.clear();
-                            });
-                          },
-                        )
-                        : null,
+                suffixIcon: _searchQuery.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear, color: Colors.grey),
+                        onPressed: () {
+                          setState(() {
+                            _searchQuery = '';
+                            _searchController.clear();
+                          });
+                        },
+                      )
+                    : null,
               ),
               onChanged: (value) {
                 setState(() {
@@ -179,10 +179,9 @@ class _AdminTicketsScreenState extends State<AdminTicketsScreen> {
   }
 
   Widget _buildTicketsList() {
-    final stream =
-        _filterStatus == 'todos'
-            ? TicketService().obtenerTodosLosTickets()
-            : TicketService().obtenerTicketsPorEstado(_filterStatus);
+    final stream = _filterStatus == 'todos'
+        ? TicketService().obtenerTodosLosTickets()
+        : TicketService().obtenerTicketsPorEstado(_filterStatus);
 
     return StreamBuilder<List<Ticket>>(
       stream: stream,
@@ -196,13 +195,11 @@ class _AdminTicketsScreenState extends State<AdminTicketsScreen> {
         }
 
         final tickets = snapshot.data!;
-        final filteredTickets =
-            tickets.where((ticket) {
-              final titulo = ticket.titulo.toLowerCase();
-              final nombre = ticket.usuarioNombre.toLowerCase();
-              return titulo.contains(_searchQuery) ||
-                  nombre.contains(_searchQuery);
-            }).toList();
+        final filteredTickets = tickets.where((ticket) {
+          final titulo = ticket.titulo.toLowerCase();
+          final nombre = ticket.usuarioNombre.toLowerCase();
+          return titulo.contains(_searchQuery) || nombre.contains(_searchQuery);
+        }).toList();
 
         if (filteredTickets.isEmpty) {
           return const Center(
@@ -212,22 +209,19 @@ class _AdminTicketsScreenState extends State<AdminTicketsScreen> {
 
         return ListView.separated(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-          itemCount:
-              (_filterStatus == 'todos' ? 1 : 0) + filteredTickets.length,
-          separatorBuilder:
-              (_, __) => const Divider(
-                height: 1,
-                color: Colors.grey,
-                indent: 12,
-                endIndent: 12,
-              ),
+          itemCount: (_filterStatus == 'todos' ? 1 : 0) + filteredTickets.length,
+          separatorBuilder: (_, __) => const Divider(
+            height: 1,
+            color: Colors.grey,
+            indent: 12,
+            endIndent: 12,
+          ),
           itemBuilder: (context, index) {
             if (_filterStatus == 'todos' && index == 0) {
-              return DashboardWidget(tickets: tickets);
+              return DashboardWidget(tickets: tickets); // usa el widget importado
             }
 
-            final ticket =
-                filteredTickets[_filterStatus == 'todos' ? index - 1 : index];
+            final ticket = filteredTickets[_filterStatus == 'todos' ? index - 1 : index];
 
             return Card(
               elevation: 6,
@@ -330,9 +324,7 @@ class _AdminTicketsScreenState extends State<AdminTicketsScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder:
-                                  (_) =>
-                                      AdminTicketDetailScreen(ticket: ticket),
+                              builder: (_) => AdminTicketDetailScreen(ticket: ticket),
                             ),
                           );
                         },
@@ -358,25 +350,24 @@ class _AdminTicketsScreenState extends State<AdminTicketsScreen> {
   void _confirmarEliminar(Ticket ticket) {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('¿Eliminar Ticket?'),
-            content: const Text('¿Estás seguro de eliminar este ticket?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Cancelar'),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                onPressed: () async {
-                  await TicketService().eliminarTicket(ticket.id);
-                  Navigator.pop(context);
-                },
-                child: const Text('Eliminar'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('¿Eliminar Ticket?'),
+        content: const Text('¿Estás seguro de eliminar este ticket?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
           ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            onPressed: () async {
+              await TicketService().eliminarTicket(ticket.id);
+              Navigator.pop(context);
+            },
+            child: const Text('Eliminar'),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'admin_tickets_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  LoginScreen({Key? key}) : super(key: key);
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }

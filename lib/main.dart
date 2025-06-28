@@ -15,23 +15,21 @@ Future<void> main() async {
 
   final apiKey = dotenv.env['HUGGINGFACE_API_KEY'];
   if (apiKey == null || apiKey.isEmpty) {
-    print('ERROR: API Key no configurada');
-  } else {
-    print('API Key cargada correctamente');
+    throw Exception('ERROR: API Key no configurada en .env');
   }
 
-  runApp(const MyApp());
+  runApp(MyApp());  // QUITAR const si LoginScreen no es const
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);  
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Login Simple',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: LoginScreen(),  // QUITAR const si LoginScreen no es const
     );
   }
 }

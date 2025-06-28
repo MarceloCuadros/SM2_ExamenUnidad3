@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart'; // para acceder a la key
 import 'package:proyecto_moviles2/services/ticket_service.dart';
 
 class CreateTicketScreen extends StatefulWidget {
+  CreateTicketScreen({Key? key}) : super(key: key);
   @override
   _CreateTicketScreenState createState() => _CreateTicketScreenState();
 }

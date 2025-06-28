@@ -44,7 +44,11 @@ class AuthService {
       // 4. Obtener y devolver el usuario completo
       return await _getUserFromFirestore(userCredential.user!.uid);
     } on FirebaseAuthException catch (e) {
-      print('Error al iniciar sesión: ${e.message}');
+      // Reemplaza print por manejo adecuado de error, por ejemplo lanzar o loggear en sistema
+      // Aquí devuelvo null para que quien llame maneje el error
+      return null;
+    } catch (e) {
+      // Captura errores generales
       return null;
     }
   }
@@ -99,7 +103,9 @@ class AuthService {
 
       return nuevoUsuario;
     } on FirebaseAuthException catch (e) {
-      print('Error al registrar: ${e.message}');
+      // Manejar error sin print
+      return null;
+    } catch (e) {
       return null;
     }
   }

@@ -8,6 +8,8 @@ import 'package:proyecto_moviles2/screens/admin_tickets_screen.dart';
 import 'package:proyecto_moviles2/services/ticket_service.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key); // Constructor const para optimización
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -28,38 +30,35 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _loadUserAndRole() async {
     _user = FirebaseAuth.instance.currentUser;
+
     if (_user == null) {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
       return;
     }
 
     try {
-      final userDoc =
-          await FirebaseFirestore.instance
-              .collection('usuarios')
-              .doc(_user!.uid)
-              .get();
+      final userDoc = await FirebaseFirestore.instance
+          .collection('usuarios')
+          .doc(_user!.uid)
+          .get();
 
-      if (userDoc.exists) {
-        setState(() {
-          _userRole = (userDoc.data()?['rol'] ?? '').toString();
-          _isLoadingRole = false;
-        });
-      } else {
-        setState(() {
-          _userRole = '';
-          _isLoadingRole = false;
-        });
-      }
+      if (!mounted) return;
+
+      setState(() {
+        _userRole = (userDoc.data()?['rol'] ?? '').toString();
+        _isLoadingRole = false;
+      });
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _userRole = '';
         _isLoadingRole = false;
       });
-      print('Error al cargar rol: $e');
+      // Opcional: log o manejo de error adicional
     }
   }
 
@@ -92,9 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
             tooltip: 'Cerrar sesión',
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
+              if (!mounted) return;
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => LoginScreen()),
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
               );
             },
           ),
@@ -111,11 +111,10 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icons.add,
               label: 'Crear Ticket',
               color: Colors.blue,
-              onPressed:
-                  () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => CreateTicketScreen()),
-                  ),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => CreateTicketScreen()), // No const porque CreateTicketScreen no es const
+              ),
             ),
             _buildActionButton(
               icon: Icons.list_alt,
@@ -196,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
         highlightColor: color.withOpacity(0.1),
         child: Container(
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1), // fondo azul muy suave para destacar
+            color: color.withOpacity(0.1),
             borderRadius: BorderRadius.circular(20),
           ),
           padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 12),
@@ -211,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 15,
-                  color: Colors.grey[900], // texto oscuro para buen contraste
+                  color: Colors.grey[900],
                 ),
               ),
             ],
@@ -222,89 +221,90 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _showSearchDialog(BuildContext context) {
-    final TextEditingController _searchController = TextEditingController();
+    final TextEditingController searchController = TextEditingController();
 
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Buscar Tickets'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: _searchController,
-                  decoration: const InputDecoration(
-                    labelText: 'Título del Ticket',
-                    hintText: 'Ingrese el título del ticket',
-                  ),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () async {
-                    final searchQuery = _searchController.text.trim();
-                    if (searchQuery.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Por favor ingrese un valor para buscar',
-                          ),
-                        ),
-                      );
-                      return;
-                    }
-                    if (_user == null) return;
-
-                    try {
-                      final tickets = await _ticketService
-                          .buscarTicketsPorTituloYUsuarioLocal(
-                            searchQuery,
-                            _user!.uid,
-                          );
-
-                      if (tickets.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              'No se encontraron tickets con ese título',
-                            ),
-                          ),
-                        );
-                      } else {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (_) => ViewTicketsScreen(
-                                  userId: _user!.uid,
-                                  tickets: tickets,
-                                ),
-                          ),
-                        );
-                      }
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Error al buscar tickets: $e')),
-                      );
-                    }
-                  },
-                  child: const Text('Buscar'),
-                ),
-              ],
+      builder: (context) => AlertDialog(
+        title: const Text('Buscar Tickets'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: searchController,
+              decoration: const InputDecoration(
+                labelText: 'Título del Ticket',
+                hintText: 'Ingrese el título del ticket',
+              ),
             ),
-          ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () async {
+                final searchQuery = searchController.text.trim();
+                if (searchQuery.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Por favor ingrese un valor para buscar',
+                      ),
+                    ),
+                  );
+                  return;
+                }
+                if (_user == null) return;
+
+                try {
+                  final tickets = await _ticketService
+                      .buscarTicketsPorTituloYUsuarioLocal(
+                    searchQuery,
+                    _user!.uid,
+                  );
+
+                  if (!mounted) return;
+
+                  if (tickets.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'No se encontraron tickets con ese título',
+                        ),
+                      ),
+                    );
+                  } else {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ViewTicketsScreen(
+                          userId: _user!.uid,
+                          tickets: tickets,
+                        ),
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Error al buscar tickets: $e')),
+                  );
+                }
+              },
+              child: const Text('Buscar'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   Future<void> _generateReports(BuildContext context) async {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Generando reportes...')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Generando reportes...')),
+    );
   }
 
   void _showSettings(BuildContext context) {
@@ -313,30 +313,29 @@ class _HomeScreenState extends State<HomeScreen> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      builder:
-          (context) => Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.person),
-                  title: const Text('Perfil'),
-                  onTap: () => Navigator.pop(context),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.notifications),
-                  title: const Text('Notificaciones'),
-                  onTap: () => Navigator.pop(context),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.help),
-                  title: const Text('Ayuda'),
-                  onTap: () => Navigator.pop(context),
-                ),
-              ],
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Perfil'),
+              onTap: () => Navigator.pop(context),
             ),
-          ),
+            ListTile(
+              leading: const Icon(Icons.notifications),
+              title: const Text('Notificaciones'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: const Icon(Icons.help),
+              title: const Text('Ayuda'),
+              onTap: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
