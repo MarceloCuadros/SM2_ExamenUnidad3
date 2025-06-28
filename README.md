@@ -17,7 +17,9 @@
 ![image](https://github.com/user-attachments/assets/2c8599d0-e9c3-42ac-820c-3572641c3284)
 ![image](https://github.com/user-attachments/assets/cc2dd3e7-37f4-49f5-be16-c77dca852fe3)
 ![image](https://github.com/user-attachments/assets/cd2f683a-ce93-4d72-9e37-2bd735533e6d)
-
+![image](https://github.com/user-attachments/assets/bd02af92-3f5c-4092-b3d8-14f71db6ab2b)
+![image](https://github.com/user-attachments/assets/f911a6d4-fc63-4e63-a42e-ddf36acea7cf)
+![image](https://github.com/user-attachments/assets/605e4328-71ab-46e0-8cd8-29619d1f51dc)
 
 ### EXPLICACION DE LO REALIZADO
 Explicación de lo Realizado
