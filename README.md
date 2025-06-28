@@ -42,7 +42,6 @@ El análisis estático del código (flutter analyze)
 Las pruebas unitarias (flutter test)
 
 3. Desarrollo de Pruebas Unitarias
-
 Implementé 3 pruebas unitarias en el archivo main_test.dart que verifican:
 La correcta división de strings usando split()
 La eliminación adecuada de espacios con trim()
