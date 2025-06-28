@@ -1,4 +1,4 @@
-# 🚀 INFORME DE EXAMEN - UNIDAD III  
+![image](https://github.com/user-attachments/assets/cff128c4-2fe7-441d-8a91-064411660960)# 🚀 INFORME DE EXAMEN - UNIDAD III  
 **Automatización de Calidad con GitHub Actions**  
 
 <div style="background-color: #1A1A1A; color: #FFFFFF; padding: 20px; border-radius: 10px;">
@@ -6,38 +6,96 @@
 ## 🔥 INFORMACIÓN PRINCIPAL  
 | **📌 Curso**       | Desarrollo de Aplicaciones Móviles |  
 |--------------------|------------------------------------|  
-| **📅 Fecha**       | [DD/MM/AAAA]                       |  
-| **👤 Estudiante**  | [Nombre Apellido]                  |  
-| **🔗 Repositorio** | [SM2_ExamenUnidad3](https://github.com/[TU_USUARIO]/SM2_ExamenUnidad3) |  
+| **📅 Fecha**       | [27/06/2025]                       |  
+| **👤 Estudiante**  | [Raúl Marcelo Cuadros Napa]                  |  
+| **🔗 Repositorio** | [SM2_ExamenUnidad3](https://github.com/MarceloCuadros/SM2_ExamenUnidad3) |  
 
 ---
 
 ## 📸 CAPTURAS CLAVE  
+![image](https://github.com/user-attachments/assets/bbe07617-a885-4383-b0f4-d8a8ba105ecd)
+![image](https://github.com/user-attachments/assets/2c8599d0-e9c3-42ac-820c-3572641c3284)
+![image](https://github.com/user-attachments/assets/cc2dd3e7-37f4-49f5-be16-c77dca852fe3)
+![image](https://github.com/user-attachments/assets/cd2f683a-ce93-4d72-9e37-2bd735533e6d)
 
-### 1️⃣ Estructura del Proyecto  
-![Estructura](https://via.placeholder.com/800x400/000000/FFFFFF?text=.github%2Fworkflows%2F+%7C+test%2F+%7C+ARCHIVOS+CONFIGURADOS)  
 
-### 2️⃣ Código del Workflow  
-```yaml
-name: 🔍 Quality Check
-on: 
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+### EXPLICACION DE LO REALIZADO
+Explicación de lo Realizado
 
-jobs:
-  quality:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: 🛠️ Flutter Setup
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.19.0'
-      - name: 📦 Dependencies
-        run: flutter pub get
-      - name: 🔎 Code Analysis
-        run: flutter analyze
-      - name: 🧪 Run Tests
-        run: flutter test
+1. Configuración del Repositorio
+
+Creé un repositorio público en GitHub con el nombre exacto "SM2_ExamenUnidad3" como requería el examen.
+
+Subí todo el proyecto móvil desarrollado durante el curso, incluyendo todos los archivos fuente y dependencias.
+
+Establecí la estructura de carpetas exigida:
+
+La carpeta .github/workflows/ para alojar el archivo de configuración del workflow
+
+La carpeta test/ para contener las pruebas unitarias
+
+2. Implementación del Workflow
+
+Desarrollé el archivo quality-check.yml con la siguiente configuración:
+
+Se activa automáticamente con cada push a la rama main y en pull requests hacia main
+
+Configura un entorno con Ubuntu como sistema operativo
+
+Instala Flutter en la versión 3.19.0
+
+Ejecuta en secuencia:
+
+La obtención de dependencias (flutter pub get)
+
+El análisis estático del código (flutter analyze)
+
+Las pruebas unitarias (flutter test)
+
+3. Desarrollo de Pruebas Unitarias
+
+Implementé 3 pruebas unitarias en el archivo main_test.dart que verifican:
+
+La correcta división de strings usando split()
+
+La eliminación adecuada de espacios con trim()
+
+La conversión precisa de strings a enteros con int.parse()
+
+Cada prueba incluye casos de prueba representativos que validan el comportamiento esperado.
+
+4. Verificación y Resultados
+
+El workflow se ejecutó satisfactoriamente ante cada push y pull request
+
+Todas las etapas se completaron exitosamente:
+
+El análisis de código no reportó warnings ni errores
+
+Las 3 pruebas unitarias pasaron correctamente (100% de cobertura)
+
+Documenté los resultados con capturas de pantalla que muestran:
+
+La estructura de archivos implementada
+
+El contenido del workflow
+
+La ejecución exitosa en GitHub Actions
+
+5. Documentación
+
+Redacté este informe completo en el README.md del repositorio
+
+Convertí el README a PDF para la entrega final
+
+Incluí todos los elementos requeridos:
+
+Datos del curso y estudiante
+
+URL del repositorio
+
+Evidencias gráficas
+
+Explicación detallada del trabajo realizado
+
+El proyecto cumple con todos los requisitos establecidos en el examen, implementando un flujo DevOps completo que garantiza la calidad del código mediante análisis estático y pruebas automatizadas.
