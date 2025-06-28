@@ -25,79 +25,48 @@
 Explicación de lo Realizado
 
 1. Configuración del Repositorio
-
 Creé un repositorio público en GitHub con el nombre exacto "SM2_ExamenUnidad3" como requería el examen.
-
 Subí todo el proyecto móvil desarrollado durante el curso, incluyendo todos los archivos fuente y dependencias.
-
 Establecí la estructura de carpetas exigida:
-
 La carpeta .github/workflows/ para alojar el archivo de configuración del workflow
-
 La carpeta test/ para contener las pruebas unitarias
 
 2. Implementación del Workflow
-
 Desarrollé el archivo quality-check.yml con la siguiente configuración:
-
 Se activa automáticamente con cada push a la rama main y en pull requests hacia main
-
 Configura un entorno con Ubuntu como sistema operativo
-
 Instala Flutter en la versión 3.19.0
-
 Ejecuta en secuencia:
-
 La obtención de dependencias (flutter pub get)
-
 El análisis estático del código (flutter analyze)
-
 Las pruebas unitarias (flutter test)
 
 3. Desarrollo de Pruebas Unitarias
 
 Implementé 3 pruebas unitarias en el archivo main_test.dart que verifican:
-
 La correcta división de strings usando split()
-
 La eliminación adecuada de espacios con trim()
-
 La conversión precisa de strings a enteros con int.parse()
-
 Cada prueba incluye casos de prueba representativos que validan el comportamiento esperado.
 
 4. Verificación y Resultados
-
 El workflow se ejecutó satisfactoriamente ante cada push y pull request
-
 Todas las etapas se completaron exitosamente:
-
 El análisis de código no reportó warnings ni errores
-
 Las 3 pruebas unitarias pasaron correctamente (100% de cobertura)
-
 Documenté los resultados con capturas de pantalla que muestran:
-
 La estructura de archivos implementada
-
 El contenido del workflow
-
 La ejecución exitosa en GitHub Actions
 
 5. Documentación
-
 Redacté este informe completo en el README.md del repositorio
-
 Convertí el README a PDF para la entrega final
-
 Incluí todos los elementos requeridos:
-
 Datos del curso y estudiante
-
 URL del repositorio
-
 Evidencias gráficas
-
 Explicación detallada del trabajo realizado
 
+FINALMENTE:
 El proyecto cumple con todos los requisitos establecidos en el examen, implementando un flujo DevOps completo que garantiza la calidad del código mediante análisis estático y pruebas automatizadas.
