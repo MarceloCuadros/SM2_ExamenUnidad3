@@ -35,7 +35,7 @@ La carpeta test/ para contener las pruebas unitarias
 Desarrollé el archivo quality-check.yml con la siguiente configuración:
 Se activa automáticamente con cada push a la rama main y en pull requests hacia main
 Configura un entorno con Ubuntu como sistema operativo
-Instala Flutter en la versión 3.19.0
+Instala Flutter en la versión 3.24.3
 Ejecuta en secuencia:
 La obtención de dependencias (flutter pub get)
 El análisis estático del código (flutter analyze)
