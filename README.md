@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/cff128c4-2fe7-441d-8a91-064411660960)# 🚀 INFORME DE EXAMEN - UNIDAD III  
+# 🚀 INFORME DE EXAMEN - UNIDAD III  
 **Automatización de Calidad con GitHub Actions**  
 
 <div style="background-color: #1A1A1A; color: #FFFFFF; padding: 20px; border-radius: 10px;">
