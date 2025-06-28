@@ -22,7 +22,6 @@
 ![image](https://github.com/user-attachments/assets/605e4328-71ab-46e0-8cd8-29619d1f51dc)
 
 ### EXPLICACION DE LO REALIZADO
-Explicación de lo Realizado
 
 1. Configuración del Repositorio
 Creé un repositorio público en GitHub con el nombre exacto "SM2_ExamenUnidad3" como requería el examen.
@@ -67,5 +66,5 @@ URL del repositorio
 Evidencias gráficas
 Explicación detallada del trabajo realizado
 
-FINALMENTE:
+### FINALMENTE:
 El proyecto cumple con todos los requisitos establecidos en el examen, implementando un flujo DevOps completo que garantiza la calidad del código mediante análisis estático y pruebas automatizadas.
