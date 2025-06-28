@@ -1,3 +1,7 @@
+import 'package:flutter_test/flutter_test.dart';
+
 void main() {
-  assert(true); // pequeña "prueba" para que no esté vacío
+  test('prueba vacía que siempre pasa', () {
+    expect(1, equals(1));
+  });
 }
