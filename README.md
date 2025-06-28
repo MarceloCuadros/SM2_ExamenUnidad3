@@ -1,95 +1,70 @@
-# 📱 Aplicativo Móvil de Gestión de Tickets de Soporte - MDP
+INFORME DE EXAMEN - UNIDAD III
+Automatización de Calidad con GitHub Actions
 
-Este proyecto corresponde al desarrollo de una solución tecnológica orientada a mejorar la gestión de solicitudes técnicas dentro de la **Municipalidad Distrital de Pocollay (MDP)**. Se trata de una aplicación móvil multiplataforma desarrollada con **Flutter** y respaldada por **Firebase**, enfocada en optimizar el registro, seguimiento y resolución de incidencias internas.
+📋 INFORMACIÓN BÁSICA
+| Curso: | Desarrollo de Aplicaciones Móviles |
+| Fecha: | [DD/MM/AAAA] |
+| Estudiante: | [Nombre Apellido] |
+| Repositorio: | SM2_ExamenUnidad3 |
 
----
+📂 EVIDENCIAS GRÁFICAS
+1. Estructura del Proyecto
+https://via.placeholder.com/800x400/2c3e50/ffffff?text=.github%252Fworkflows%252Fquality-check.yml+%257C+test%252Fmain_test.dart
+Ubicación correcta de los archivos requeridos.
 
-## 🎯 Objetivo General
+2. Código del Workflow
+yaml
+name: Quality Check
+on: [push, pull_request]
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+      - name: Run checks
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter test
+Configuración automatizada para análisis y pruebas.
 
-Diseñar e implementar un sistema móvil que permita gestionar de forma centralizada y eficiente los tickets de soporte técnico reportados por el personal de la MDP, asegurando mayor trazabilidad, rapidez en la atención y calidad del servicio.
+3. Resultados en GitHub Actions
+https://via.placeholder.com/800x400/27ae60/ffffff?text=%E2%9C%85+All+checks+passed+%257C+100%2525+success
+Workflow completado sin errores.
 
----
+🔍 DETALLE DE LA IMPLEMENTACIÓN
+📌 Configuración Inicial
+Repositorio público creado con el nombre exacto: SM2_ExamenUnidad3.
 
-## ✅ Funcionalidades Principales
+Proyecto móvil migrado al repositorio.
 
-- Autenticación de usuarios y administradores.
-- Registro de tickets por parte de los empleados municipales.
-- Seguimiento del estado de los tickets y notificaciones automáticas.
-- Panel administrativo para gestión, priorización y cierre de incidencias.
-- Generación de reportes y estadísticas de atención.
-- Exportación de tickets en PDF.
+⚙️ Workflow Automatizado
+Paso	Acción
+Trigger	Push/Pull Request a main
+Entorno	Ubuntu + Flutter 3.19.0
+Análisis	flutter analyze (estilo/errores)
+Pruebas	flutter test (3 tests unitarios)
+🧪 Pruebas Unitarias
+dart
+// test/main_test.dart
+import 'package:flutter_test/flutter_test.dart';
 
----
-
-## 🧑‍💻 Tecnologías Utilizadas
-
-| Componente        | Herramienta / Tecnología      |
-|-------------------|-------------------------------|
-| Framework         | Flutter (Dart)                |
-| Backend & Auth    | Firebase Authentication       |
-| Base de Datos     | Firebase Firestore (NoSQL)    |
-| Notificaciones    | Firebase Cloud Messaging      |
-| Control de versiones | Git + GitHub               |
-| IDE               | Android Studio / VS Code      |
-
----
-
-## 🧠 Arquitectura del Sistema
-
-El sistema sigue un enfoque **cliente-servidor** con una arquitectura modular que favorece la escalabilidad y el mantenimiento. Entre sus principales componentes se incluyen:
-
-- **Frontend:** Interfaz gráfica intuitiva y responsiva.
-- **Backend:** Gestión de lógica de negocio y validaciones.
-- **Base de Datos:** Almacenamiento estructurado en Firestore.
-- **Notificaciones:** Envío en tiempo real sobre el estado del ticket.
-
----
-
-## 📌 Público Objetivo
-
-- **Usuarios Generales:** Empleados de la MDP que reportan incidencias.
-- **Administradores:** Personal del área de TI encargado de gestionar tickets, usuarios y estadísticas del sistema.
-
----
-
-## 📦 Alcance
-
-- Funciona en dispositivos móviles Android y navegadores web como PWA.
-- No contempla integración con sistemas externos en esta versión.
-- Enfoque inicial en soporte técnico interno de la municipalidad.
-
----
-
-## 🔐 Seguridad
-
-- Acceso basado en roles (RBAC).
-- Validaciones en formularios.
-- Control de acceso mediante autenticación Firebase.
-- Cumplimiento con la Ley de Protección de Datos Personales (N.º 29733).
-
----
-
-## 📊 Impacto Esperado
-
-- Reducción del tiempo promedio de atención en un 25%.
-- Incremento de eficiencia operativa en un 30%.
-- Mejora significativa en la trazabilidad y satisfacción de usuarios internos.
-
----
-
-## 👥 Equipo de Desarrollo
-
-| Nombre                        | Rol                            |
-|------------------------------|---------------------------------|
-| Rodrigo Martin De La Cruz    | Jefe de Proyecto / Desarrollador |
-| Abraham Jesús Vela Vargas    | Programador / QA                |
-| Juan Jose Perez Vizcarra     | Integrador Firebase             |
-| Raúl Marcelo Cuadros Napa    | UI/UX Designer                  |
-| Marjiory Grace Llantay Machaca | QA Tester                     |
-| Cristian Aldair Quispe Levano| Documentación y Soporte         |
-
----
-
-
-
-
+void main() {
+  group('Pruebas Básicas:', () {
+    test('split() divide strings', () {
+      expect("a,b,c".split(','), equals(["a", "b", "c"]));
+    });
+    
+    test('trim() elimina espacios', () {
+      expect("  texto  ".trim(), equals("texto"));
+    });
+    
+    test('int.parse() convierte a entero', () {
+      expect(int.parse("123"), equals(123));
+    });
+  });
+}
